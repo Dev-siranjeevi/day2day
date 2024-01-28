@@ -13,7 +13,7 @@
   },
 
   "chrome_url_overrides": {
-    "newtab": "./overide.html"
+    "newtab": "./index.html"
   },
   "permissions": ["scripting", "activeTab"]
 }
