@@ -209,6 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 userData.todoList = userData.todoList.filter((element) => {
                   return element !== item.querySelector("span").textContent;
                 });
+                console.log(userData);
                 // SAVET TO LOCAL STORAGE.
                 localStorage.setItem("userData", JSON.stringify(userData));
               }, 300);
