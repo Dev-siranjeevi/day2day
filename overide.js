@@ -18,14 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let dateNew = new Date();
     dateNew.setHours(dateNew.getHours() + Number(countUntil.value));
 
-    console.log(dateNew);
     // CALCULATE THE ADDED MINS
     if (countUntilmin.value !== "") {
       dateNew = new Date(dateNew);
       dateNew.setMinutes(dateNew.getMinutes() + Number(countUntilmin.value));
     }
-    console.log(dateNew);
-    const userData = {
+    let userData = {
       countTo: countUntil.value,
       countTomin: countUntilmin.value,
       countTosec: 0,
@@ -33,10 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
       break: breakbtw.value,
       todoList: [],
     }; // store user data
+    // Check for exstiting data
+
+    const persistant = JSON.parse(localStorage.getItem("userData"));
+    if (persistant !== null) {
+      if (persistant.todoList !== undefined) {
+        userData.todoList = persistant.todoList;
+      }
+    }
     localStorage.setItem("userData", JSON.stringify(userData));
     location.reload();
-
-    console.log(JSON.parse(localStorage.getItem("userData")));
   }
   const btnform = document.querySelector(".form");
   btnform.addEventListener("submit", async (event) => {
@@ -163,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let todoData = userData.todoList; //Todolist;
     const inputField = document.querySelector(".addNewItem");
     const inputData = inputField.value; //User INput
-    console.log(todoData.length !== "undefined");
-    if (todoData.length !== "undefined") {
+
+    if (todoData !== undefined) {
       //Check if the array is empty or not
       if (todoData.length > 0 || !todoData.includes(inputData.toLowerCase())) {
         //CHECK IF ARR. HAS THE INPUT.VALUE
