@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "daytoday",
+  "version": "1.0.0",
+  "description": "A basic to do app",
+  "icons": {
+    "48": "image/icons.png",
+    "128": "image/icons.png"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "chrome_url_overrides": {
+    "newtab": "./workTodo/overide.html"
+  },
+  "permissions": ["scripting", "activeTab"]
+}

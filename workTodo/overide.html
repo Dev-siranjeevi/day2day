@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work to do</title>
+    <link rel="stylesheet" href="overide.css" />
+  </head>
+  <body>
+    <!-- setup / Configuration -->
+    <nav class="nav">
+      <span class="store"></span>
+      <!-- Setup -->
+      <form action="#" class="form" name="form">
+        <!-- user setting -->
+        <div class="input-box">
+          <!-- Total number of hours the timer is to be ran -->
+          <lable class="input-title"> Timer hours </lable>
+          <input
+            type="number"
+            name="countdownto"
+            id="countdownto"
+            min="0"
+            max="24"
+            required
+          />
+        </div>
+        <!-- Total number of intervals until the timer is ran -->
+        <div class="input-box">
+          <lable class="input-title"> Timer Minutes </lable>
+          <input
+            type="number"
+            name="countdowntomin"
+            id="countdowntomin"
+            min="1"
+            max="59"
+          />
+        </div>
+        <!-- Total number of intervals until the timer is ran -->
+        <div class="input-box">
+          <lable class="input-title"> Breaks planned </lable>
+          <input type="number" name="breakbtw" id="breakbtw" min="0" max="5" />
+        </div>
+        <!-- Action button -->
+        <div class="actionbtn">
+          <button type="submit" class="btn-primary">Apply</button>
+          <button type="reset" class="btn-secondary">Reset</button>
+        </div>
+      </form>
+    </nav>
+    <div class="menubtn">
+      <img src="hand.svg" alt="hand" class="hand" />
+    </div>
+
+    <!-- Main content -->
+    <main>
+      <div class="main-container brand">Work Todo</div>
+      <div class="main-container content">
+        <!-- App brand -->
+        <!-- Flip timer  -->
+        <div class="flip-clock">
+          <div class="segments">
+            <div class="segment">
+              <div class="section-title">Hours</div>
+              <div class="section-counter">
+                <div class="flip-card" data-hours-tens>
+                  <div class="flip-top">0</div>
+                  <div class="flip-bottom">0</div>
+                </div>
+                <div class="flip-card" data-hours-ones>
+                  <div class="flip-top">0</div>
+                  <div class="flip-bottom">0</div>
+                </div>
+              </div>
+            </div>
+            <div class="segment">
+              <div class="section-title">minutes</div>
+              <div class="section-counter">
+                <div class="flip-card" data-minutes-tens>
+                  <div class="flip-top">0</div>
+                  <div class="flip-bottom">0</div>
+                </div>
+                <div class="flip-card" data-minutes-ones>
+                  <div class="flip-top">0</div>
+                  <div class="flip-bottom">0</div>
+                </div>
+              </div>
+            </div>
+            <div class="segment">
+              <div class="section-title">seconds</div>
+              <div class="section-counter">
+                <div class="flip-card" data-seconds-tens>
+                  <div class="flip-top">0</div>
+                  <div class="flip-bottom">0</div>
+                </div>
+                <div class="flip-card" data-seconds-ones>
+                  <div class="flip-top">0</div>
+                  <div class="flip-bottom">0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span id="countendat"> The timer ends at 17:58:59 </span>
+        </div>
+        <!-- To do list -->
+        <div class="todolists">
+          <!-- todo lists {currently only 5 is allowed} -->
+          <div class="container-todolist">
+            <form action="#" class="todolist" id="todolist">
+              <!-- <input type="text" class="addNewItem" /> -->
+  <input type="text" name=""class="addNewItem"id="" placeholder="Type here to add new item" required>
+              <button class="addlist" type="submit">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20.3125 8.59375H13.2812V1.5625C13.2812 0.699707 12.5815 0 11.7188 0H10.1562C9.29346 0 8.59375 0.699707 8.59375 1.5625V8.59375H1.5625C0.699707 8.59375 0 9.29346 0 10.1562V11.7188C0 12.5815 0.699707 13.2812 1.5625 13.2812H8.59375V20.3125C8.59375 21.1753 9.29346 21.875 10.1562 21.875H11.7188C12.5815 21.875 13.2812 21.1753 13.2812 20.3125V13.2812H20.3125C21.1753 13.2812 21.875 12.5815 21.875 11.7188V10.1562C21.875 9.29346 21.1753 8.59375 20.3125 8.59375Z"
+                    fill="black"
+                  />
+                </svg>
+              </button>
+            </form action="#">
+            <div class="todo-items">
+            </div>
+          </div>
+        </div>
+      </div>
+      <template class="template">
+        <div class="todo-item">
+          <input type="checkbox" name="checkbox" class="checkbox" />
+          <span class="todo-content">
+            
+          </span>
+        </div>
+      </template>
+    </main>
+
+    <script src="overide.js"></script>
+  </body>
+</html>
