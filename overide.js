@@ -33,14 +33,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }; // store user data
     // Check for exstiting data
 
-    // const persistant = JSON.parse(localStorage.getItem("userData"));
+    const persistant = JSON.parse(localStorage.getItem("userData"));
 
-    // if (persistant !== null) {
-    //   if (persistant.todoList !== undefined) {
-    //     userData.todoList = [...persistant.todoList];
-    //   }
-    //   console.log(userData);
-    // }
+    if (persistant !== null) {
+      if (persistant.todoList !== undefined) {
+        userData.todoList = [...persistant.todoList];
+      }
+      console.log(userData);
+    }
     // debugger;
     localStorage.setItem("userData", JSON.stringify(userData));
     location.reload();
