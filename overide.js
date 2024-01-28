@@ -101,8 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  counter();
-
   function flipAllCards(time) {
     if (time !== 0) {
       const seconds = time % 60;
@@ -158,32 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
   todolist.addEventListener("submit", (event) => {
     event.preventDefault();
     handleUserInput();
-    // const list = document.querySelector(".todo-items");
-    // const inputData = document.querySelector(".addNewItem");
-    // const todoData = JSON.parse(localStorage.getItem("userData")).todoList;
-    // console.log(todoData);
-    // // Loop through the lisrt
-    // if (todoData.lenght > 0) {
-    //   todoData.forEach((todo) => {
-    //     // validate if the item is already available
-    //     if (!todoData.includes(inputData.value.toLowerCase())) {
-    //       // Add New Item
-    //       const listItem = document.querySelector(".template");
-    //       const template = listItem.content.cloneNode(true);
-    //       template.querySelector("span").textContent = inputData.value;
-    //       // Insert at the top of the list
-    //       list.insertBefore(template, list.children[0]);
-    //     } else {
-    //       alert("You already have it in your list");
-    //     }
-    //   });
-    // }
-    // // INput Checked
-    // const todoItems = document.querySelector(".todo-items");
-    // const inputCheckBox = todoItems.querySelectorAll("input[type=checkbox]");
-    // [...inputCheckBox].forEach((input) => {
-    //   input.checked ? console.log(input) : console.log("Hey");
-    // });
   });
 
   const handleUserInput = () => {
@@ -235,46 +207,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     inputField.value = "";
   };
-  // const handleUserInput = () => {
-  //   let userData = JSON.parse(localStorage.getItem("userData")); //Full data
-  //   let todoData = userData.todoList; //Todolist;
-  //   const inputData = document.querySelector(".addNewItem").value; //User INput
-
-  //   //Check if the array is empty or not
-  //   if (todoData.length > 0 || !todoData.includes(inputData.toLowerCase())) {
-  //     //CHECK IF ARR. HAS THE INPUT.VALUE
-  //     // ADD NEW ITEM
-  //     userData.todoList.push(inputData.toLowerCase());
-
-  //     // SAVET TO LOCAL STORAGE.
-  //     localStorage.setItem("userData", JSON.stringify(userData));
-  //     // LOOP THE ARRAY AND GET THE SPAN'S UP AND ROLLING.
-  //     const list = document.querySelector(".todo-items");
-  //     list.innerHTML = "";
-  //     // FILTER THE EMPTY
-  //     todoData
-  //       .filter((todo) => todo !== "")
-  //       .forEach((todo) => {
-  //         // Add New Item
-  //         const listItem = document.querySelector(".template");
-  //         const template = listItem.content.cloneNode(true);
-  //         template.querySelector("span").textContent = todo;
-  //         // Insert at the top of the list
-  //         list.insertBefore(template, list.children[0]);
-  //       });
-  //     // Adding event listener
-  //     const listItem = document.querySelectorAll(".todo-item");
-  //     [...listItem].forEach((item, i) => {
-  //       const todoChecker = item.querySelector("input");
-  //       todoChecker.addEventListener("click", () => {
-  //         if (todoChecker.checked) {
-  //           setTimeout(() => {
-  //             listItem[i].remove();
-  //           }, 300);
-  //         }
-  //       });
-  //     });
-  //   }
-  // };
+  counter();
   handleUserInput();
 });
