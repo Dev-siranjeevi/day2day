@@ -33,12 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }; // store user data
     // Check for exstiting data
 
-    const persistant = JSON.parse(localStorage.getItem("userData"));
-    if (persistant !== null) {
-      if (persistant.todoList !== undefined) {
-        userData.todoList = persistant.todoList;
-      }
-    }
+    // const persistant = JSON.parse(localStorage.getItem("userData"));
+
+    // if (persistant !== null) {
+    //   if (persistant.todoList !== undefined) {
+    //     userData.todoList = [...persistant.todoList];
+    //   }
+    //   console.log(userData);
+    // }
+    // debugger;
     localStorage.setItem("userData", JSON.stringify(userData));
     location.reload();
   }
@@ -163,6 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const handleUserInput = () => {
+    // this function will take the todo inputted, from the input at the top, validate the inputs create the element and add the listener to the checkboxes
+    // where on checked the entire div is removed and array is updated with the updated list and storage is updated as well.
     let userData = JSON.parse(localStorage.getItem("userData")); //Full data
     let todoData = userData.todoList; //Todolist;
     const inputField = document.querySelector(".addNewItem");
@@ -198,9 +203,12 @@ document.addEventListener("DOMContentLoaded", () => {
           todoChecker.addEventListener("click", () => {
             if (todoChecker.checked) {
               setTimeout(() => {
+                // Remove the item from the list.
                 listItem[i].remove();
-
-                userData.todoList.splice(i, 1);
+                // Remove the filtered text from todolist arr.
+                userData.todoList = userData.todoList.filter((element) => {
+                  return element !== item.querySelector("span").textContent;
+                });
                 // SAVET TO LOCAL STORAGE.
                 localStorage.setItem("userData", JSON.stringify(userData));
               }, 300);
