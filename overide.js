@@ -195,8 +195,8 @@ document.addEventListener("DOMContentLoaded", () => {
               // Add New Item
               const listItem = document.querySelector(".template");
               const template = listItem.content.cloneNode(true);
-              template.querySelectorAll("span")[0].textContent = todo;
-              template.querySelectorAll("span")[1].textContent = todo;
+              template.querySelector("span").textContent = todo;
+              // template.querySelectorAll("span")[1].textContent = todo;
               // Insert at the top of the list
               list.insertBefore(template, list.children[0]);
             });
