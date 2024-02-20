@@ -277,7 +277,8 @@ nav {
   align-items: baseline;
   gap: 1rem;
 }
-.todolist .addNewItem {
+.todolist .addNewItem,
+.addNewItemdate {
   font-family: "Dosis", sans-serif;
   width: 500px;
   padding: 20px;
@@ -287,6 +288,10 @@ nav {
   color: var(--clr-flip-text);
   border: 1px solid var(--clr-flip-top);
   border-radius: 5px;
+}
+.addNewItemdate {
+  width: 265px;
+  letter-spacing: 2px;
 }
 input[type="date"] {
   width: 200px;

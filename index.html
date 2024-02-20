@@ -34,7 +34,7 @@
             type="number"
             name="countdowntomin"
             id="countdowntomin"
-            min="1"
+            min="0"
             max="59"
           />
         </div>
@@ -102,7 +102,7 @@
               </div>
             </div>
           </div>
-          <span id="countendat"> The timer ends at 17:58:59 </span>
+          <span id="countendat"></span>
         </div>
         <!-- To do list -->
         <div class="todolists">
@@ -110,7 +110,8 @@
           <div class="container-todolist">
             <form action="#" class="todolist" id="todolist">
               <!-- <input type="text" class="addNewItem" /> -->
-  <input type="text" name=""class="addNewItem"id="" placeholder="Type here to add new item" required>
+              <input type="text" name=""class="addNewItem"id="" placeholder="Type here to add new item" required>
+              <input type="datetime-local" name=""class="addNewItemdate" required>
               <button class="addlist" type="submit">
                 <svg
                   width="22"
@@ -134,9 +135,10 @@
       <template class="template">
         <div class="todo-item">
           <input type="checkbox" name="checkbox" class="checkbox" />
-          <span class="todo-content">
-            
-          </span>
+          <div class="todo-contents">
+            <span class="todo-content"></span>
+            <span class="due-date">hey</span>
+          </div>
         </div>
       </template>
     </main>
