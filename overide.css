@@ -297,14 +297,17 @@ input[type="date"] {
 }
 .addlist {
   outline: none;
+  border: none;
   background-color: transparent;
   padding: 1rem;
-  border: 1px solid var(--clr-flip-top);
   border-radius: 5px;
   cursor: pointer;
 }
 .addlist > svg > path {
   fill: var(--clr-flip-text);
+}
+.addlist:hover > svg > path {
+  fill: var(--clr-counter);
 }
 .container-todolist {
   display: flex;

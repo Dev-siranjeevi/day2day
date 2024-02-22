@@ -17,27 +17,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const countUntilmin = document.getElementById("countdowntomin");
     const breakbtw = document.getElementById("breakbtw");
 
-    // CALCULATE THE ADDED HOURS.
-    let dateNew = new Date();
-    dateNew.setHours(dateNew.getHours() + Number(countUntil.value));
-
-    // CALCULATE THE ADDED MINS
-    if (countUntilmin.value !== "") {
-      dateNew = new Date(dateNew);
-      dateNew.setMinutes(dateNew.getMinutes() + Number(countUntilmin.value));
-    }
     let userData = {
-      countTo: countUntil.value,
-      countTomin: countUntilmin.value,
-      countTosec: 0,
+      displayTime: [countUntil.value, countUntilmin.value],
+      countTo: Number(countUntil.value), //Hour
+      countTomin: Number(countUntilmin.value), //min
+      countTosec: 0, //sec
       countUntil: dateNew,
       break: breakbtw.value,
       todoList: [],
     }; // store user data
-    // Check for exstiting data
 
+    const calTotalRunTime =
+      Number(userData.countTo) * 60 + Number(userData.countTomin);
+    // // CALCULATE THE ADDED HOURS.
+    // let dateNew = new Date();
+    // dateNew.setHours(dateNew.getHours() + Number(countUntil.value));
+    // CALCULATE THE ADDED MINS
+    if (countUntilmin.value !== "") {
+      dateNew = new Date(dateNew);
+      dateNew.setMinutes(dateNew.getMinutes() + calTotalRunTime);
+    }
+    // Check for exstiting data\
     const persistant = JSON.parse(localStorage.getItem("userData"));
-
     if (persistant !== null) {
       if (persistant.todoList !== undefined) {
         userData.todoList = [...persistant.todoList];
@@ -61,18 +62,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function counter() {
     let userData = JSON.parse(localStorage.getItem("userData"));
+    console.log(userData);
     if (userData !== null) {
       const countUntilDate = userData.countUntil;
       if (new Date() <= new Date(countUntilDate)) {
-        const countEnd = userData.countTo;
-        const countTomin = userData.countTomin;
+        const [disHour, disMin] = userData.displayTime;
         const countUntil = document.getElementById("countdownto");
         const countUntilmin = document.getElementById("countdowntomin");
-        countUntil.value = countEnd;
-        countUntilmin.value = countTomin;
-        const countToDate = new Date().setHours(
-          new Date().getHours() + Number(countEnd)
-        );
+        countUntil.value = disHour;
+        countUntilmin.value = disMin;
         options = {
           hour: "numeric",
           minute: "numeric",
@@ -228,4 +226,21 @@ document.addEventListener("DOMContentLoaded", () => {
   counter();
   handleUserInput();
   // Load initial data
+
+  const handleTimerPause = () => {
+    let userData = JSON.parse(localStorage.getItem("userData")); //Full data
+    const preDate = new Date(userData.countUntil);
+    console.log(preDate);
+    let postDate = new Date();
+    // postDate.setHours(postDate.getHours() + 2);
+    let diff = preDate - postDate;
+
+    let ms = diff % 1000;
+    let ss = Math.floor(diff / 1000) % 60;
+    let mm = Math.floor(diff / 1000 / 60) % 60;
+    let hh = Math.floor(diff / 1000 / 60 / 60);
+
+    console.log(`${diff}ms = ${hh}hr, ${mm}min, ${ss}sec, ${ms}ms`);
+  };
+  handleTimerPause();
 });
