@@ -288,6 +288,9 @@ nav {
   border: 1px solid var(--clr-flip-top);
   border-radius: 5px;
 }
+.addNewItem.timeinp {
+  width: 15%;
+}
 /* .addNewItemdate {
   width: 265px;
   letter-spacing: 2px;
@@ -306,6 +309,9 @@ input[type="date"] {
 .addlist > svg > path {
   fill: var(--clr-flip-text);
 }
+.addlist.active > svg > path {
+  fill: var(--clr-counter);
+}
 .addlist:hover > svg > path {
   fill: var(--clr-counter);
 }
@@ -323,6 +329,13 @@ input[type="date"] {
   display: flex;
   width: 100%;
   /* justify-content: space-between; */
+}
+.todo-timer {
+  color: var(--clr-counter);
+  cursor: pointer;
+}
+.timeinp {
+  width: 10%;
 }
 .todo-items {
   width: 100%;
@@ -343,7 +356,7 @@ input[type="date"] {
   border-radius: 5px;
   display: flex;
   gap: 1rem;
-  align-items: center;
+  align-items: baseline;
   font-size: 1.25rem;
   justify-content: center;
 }

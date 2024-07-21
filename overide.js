@@ -1,6 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const actionBtn = document.querySelector(".addlist");
   const reset = document.querySelector(".btn-secondary");
+  const inputField = document.getElementById("todoinput");
+  const todoTimer = document.getElementById("todoTimer");
+  const todoTimermin = document.getElementById("todoTimermin");
+  const breaktime = document.getElementById("breaktime");
+  const countUntil = document.getElementById("countdownto");
+  const countUntilmin = document.getElementById("countdowntomin");
+  const breakbtw = document.getElementById("breakbtw");
 
+  // const getPer = () => {
+  //   console.log(breakbtw.value);
+  //   if (breakbtw.value !== "" || breaktime.value !== "") {
+  //     const totalTimeSet =
+  //       Number(countUntil.value) + Number(countUntilmin.value);
+  //     const setBreakmin = Number(breaktime.value) * Number(breakbtw.value);
+  //     const breakPer = 16.67;
+  //     const calculateBreakPer = (setBreakmin / totalTimeSet).toFixed(2);
+  //     if (calculateBreakPer <= 16.67) {
+  //       alert("The set break time exceeds the productitvity limit");
+  //     }
+  //   }
+  // };
+  // // BreakTime
+  // breaktime.addEventListener("input", getPer);
+  // breakbtw.addEventListener("input", getPer);
   function menuactivate() {
     const nav = document.querySelector(".nav");
     const menubtn = document.querySelector(".menubtn");
@@ -10,33 +34,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   const hand = document.querySelector(".hand");
   hand.addEventListener("click", menuactivate);
-
   // Handle user input
   async function handleUserData() {
-    const countUntil = document.getElementById("countdownto");
-    const countUntilmin = document.getElementById("countdowntomin");
-    const breakbtw = document.getElementById("breakbtw");
-
+    // // CALCULATE THE ADDED HOURS.
+    let dateNew = new Date();
+    dateNew.setHours(dateNew.getHours() + Number(countUntil.value));
+    // CALCULATE THE ADDED MINS
+    if (countUntilmin.value !== "") {
+      dateNew.setMinutes(dateNew.getMinutes() + Number(countUntilmin.value));
+      console.log(new Date(dateNew));
+    }
     let userData = {
       displayTime: [countUntil.value, countUntilmin.value],
       countTo: Number(countUntil.value), //Hour
       countTomin: Number(countUntilmin.value), //min
-      countTosec: 0, //sec
-      countUntil: dateNew,
+      breakTime: breaktime.value, //sec
       break: breakbtw.value,
+      totalBreakTime: breaktime.value * breakbtw.value,
+      countUntil: dateNew,
       todoList: [],
     }; // store user data
-
-    const calTotalRunTime =
-      Number(userData.countTo) * 60 + Number(userData.countTomin);
-    // // CALCULATE THE ADDED HOURS.
-    // let dateNew = new Date();
-    // dateNew.setHours(dateNew.getHours() + Number(countUntil.value));
-    // CALCULATE THE ADDED MINS
-    if (countUntilmin.value !== "") {
-      dateNew = new Date(dateNew);
-      dateNew.setMinutes(dateNew.getMinutes() + calTotalRunTime);
-    }
+    // getPer();
     // Check for exstiting data\
     const persistant = JSON.parse(localStorage.getItem("userData"));
     if (persistant !== null) {
@@ -156,10 +174,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   todolist.addEventListener("submit", async (event) => {
     event.preventDefault();
-    handleUserInput();
+    await handleUserInput();
   });
-
-  const handleUserInput = () => {
+  // When a user Input changed.
+  inputField.addEventListener("input", () => {
+    const inputValue = inputField.value;
+    if (inputValue !== "") {
+      actionBtn.classList.add("active");
+    } else {
+      actionBtn.classList.remove("active");
+    }
+  });
+  const handleUserInput = async () => {
     // this function will take the todo inputted, from the input at the top, validate the inputs create the element and add the listener to the checkboxes
     // where on checked the entire div is removed and array is updated with the updated list and storage is updated as well.
     let userData = JSON.parse(localStorage.getItem("userData")); //Full data
@@ -167,20 +193,29 @@ document.addEventListener("DOMContentLoaded", () => {
     userData === null && handleUserData();
     if (userData !== null) {
       let todoData = userData.todoList; //Todolist;
-      const inputField = document.querySelector(".addNewItem");
-      // const inputFielddate = document.querySelector(".addNewItemdate");
       const inputData = inputField.value; //User INput
-
+      console.log(todoData);
       if (todoData !== undefined) {
+        const isavailable = todoData.some((todoItem) => {
+          return todoItem.task === inputData;
+        });
+        console.log(isavailable);
         //Check if the array is empty or not
-        if (
-          todoData.length > 0 ||
-          !todoData.includes(inputData.toLowerCase())
-        ) {
+        // (todoData.length > 0) &
+        if (!isavailable) {
           //CHECK IF ARR. HAS THE INPUT.VALUE
           // ADD NEW ITEM
-          userData.todoList.push(inputData.toLowerCase());
-          userData.todoList = userData.todoList.filter((todo) => todo !== "");
+          // userData.todoList.push(inputData.toLowerCase());
+          userData.todoList.push({
+            task: inputData.toLowerCase(),
+            timetospend:
+              Number(todoTimer.value) * 60 + Number(todoTimermin.value),
+            id: userData.todoList.length,
+          });
+          console.log(userData);
+          userData.todoList = userData.todoList.filter(
+            (todo) => todo.task !== ""
+          );
           // SAVET TO LOCAL STORAGE.
           localStorage.setItem("userData", JSON.stringify(userData));
           // LOOP THE ARRAY AND GET THE SPAN'S UP AND ROLLING.
@@ -188,12 +223,18 @@ document.addEventListener("DOMContentLoaded", () => {
           list.innerHTML = "";
           // FILTER THE EMPTY
           todoData
-            .filter((todo) => todo !== "")
+            .filter((todo) => todo.task !== "")
             .forEach((todo) => {
               // Add New Item
               const listItem = document.querySelector(".template");
               const template = listItem.content.cloneNode(true);
-              template.querySelector("span").textContent = todo;
+              template.querySelector("div").classList.add(`id${todo.id}`);
+              template.querySelectorAll("span")[0].textContent = todo.task;
+              template.querySelectorAll("span")[1].textContent = `${
+                Number(todo.timetospend) > 60
+                  ? (Number(todo.timetospend) / 60).toFixed(1) + "hr"
+                  : Number(todo.timetospend) + "min"
+              } `;
               // template.querySelectorAll("span")[1].textContent = todo;
               // Insert at the top of the list
               list.insertBefore(template, list.children[0]);
@@ -209,8 +250,20 @@ document.addEventListener("DOMContentLoaded", () => {
                   listItem[i].remove();
                   // Remove the filtered text from todolist arr.
                   userData.todoList = userData.todoList.filter((element) => {
-                    return element !== item.querySelector("span").textContent;
+                    return (
+                      element.task !== item.querySelector("span").textContent
+                    );
                   });
+                  // const alltodoItem = [
+                  //   ...document.querySelectorAll(".todo-item"),
+                  // ].map((item) => {
+                  //   const spanTodo = item.querySelector("span");
+                  //   userData.todoList.map(e => {
+                  //     if (e.task == spanTodo.innerHTML) {
+                  //       item.className.indexOf("id")
+                  //     }
+                  //   })
+                  // });
                   // SAVET TO LOCAL STORAGE.
                   localStorage.setItem("userData", JSON.stringify(userData));
                 }, 300);
@@ -230,9 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const handleTimerPause = () => {
     let userData = JSON.parse(localStorage.getItem("userData")); //Full data
     const preDate = new Date(userData.countUntil);
-    console.log(preDate);
     let postDate = new Date();
-    // postDate.setHours(postDate.getHours() + 2);
     let diff = preDate - postDate;
 
     let ms = diff % 1000;

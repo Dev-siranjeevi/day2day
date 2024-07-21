@@ -34,7 +34,17 @@
             type="number"
             name="countdowntomin"
             id="countdowntomin"
-            min="0"
+            min="1"
+            max="59"
+          />
+        </div>
+        <div class="input-box">
+          <lable class="input-title"> Break time (min) </lable>
+          <input
+            type="number"
+            name="breaktime"
+            id="breaktime"
+            min="1"
             max="59"
           />
         </div>
@@ -113,7 +123,9 @@
           <div class="container-todolist">
             <form action="#" class="todolist" id="todolist">
               <!-- <input type="text" class="addNewItem" /> -->
-              <input type="text" name=""class="addNewItem"id="" placeholder="Type here to add new item" required>
+              <input type="text" name=""class="addNewItem" id="todoinput" placeholder="Type here to add new item" required>
+              <input type="number" name=""class="addNewItem timeinp" id="todoTimer"  min="0" max="24" placeholder="hour" required>
+              <input type="number" name=""class="addNewItem timeinp" id="todoTimermin"  min="1" max="59" placeholder="minutes" required>
               <!-- <input type="datetime-local" name=""class="addNewItemdate" required> -->
               <button class="addlist" type="submit">
                 <svg
@@ -137,6 +149,7 @@
         <div class="todo-item">
           <input type="checkbox" name="checkbox" class="checkbox" />
           <span class="todo-content"></span>
+          <span class="todo-timer"></span>
         </div>
       </template>
     </main>
