@@ -33,7 +33,7 @@ nav {
   font-family: "Dosis", sans-serif;
   position: absolute;
   padding: 1rem;
-  height: 22rem;
+  height: fit-content;
   width: 10rem;
   right: 120px;
   top: 40px;
