@@ -305,7 +305,11 @@ const setUpTimer = (todolist) => {
       totalTaskTime = totalTaskTime + task.timetospend;
       task.timerAdd = true;
     });
+    let allTaskTime = 0;
 
+    todolist.forEach((e) => {
+      allTaskTime = allTaskTime + e.timetospend;
+    });
     console.log([totalTaskTime, initialTimer]);
     console.log();
     const diff =
@@ -324,7 +328,7 @@ const setUpTimer = (todolist) => {
         updateHour = diff / 60;
       }
     }
-    if (totalTaskTime > initialTimer) {
+    if (allTaskTime > initialTimer) {
       let countUptil = new Date();
       countUptil.setHours(countUptil.getHours() + Number(updateHour));
       countUptil.setMinutes(countUptil.getMinutes() + Number(updateMin));
@@ -338,12 +342,12 @@ const setUpTimer = (todolist) => {
       userData.countTo = countTo;
       userData.displayTime = [countTo, countTomin];
       userData.countUntil = countUntil;
-      userData.todoList = todolist;
       countUntil.value = countTo;
       countUntilmin.value = countTomin;
       // localStorage.setItem("userData", JSON.stringify(userData));
       console.log("Data set up done");
     }
+    userData.todoList = todolist;
     return userData;
   } else {
     handleUserInput();
