@@ -6,52 +6,73 @@
     <title>Work to do</title>
     <link rel="icon" type="image/x-icon" href="./image/icons.png">
     <link rel="stylesheet" href="overide.css" />
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- setup / Configuration -->
-    <nav class="nav">
-      <span class="store"></span>
+    
+  <!-- Converting the menu item into a modal box -->
+  <dialog id="myDialog">
       <!-- Setup -->
-      <form action="#" class="form" name="form">
-        <!-- user setting -->
+      <form action="#" class="form" id="userSetting"name="form">
+        <div class="input-box closemodal">
+          <h2>App setting</h2>
+          <svg id="closemodal" viewBox="0 0 24 24"><path class="cls-1" d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm4.707,14.293a1,1,0,1,1-1.414,1.414L12,13.414,8.707,16.707a1,1,0,1,1-1.414-1.414L10.586,12,7.293,8.707A1,1,0,1,1,8.707,7.293L12,10.586l3.293-3.293a1,1,0,1,1,1.414,1.414L13.414,12Z"/></svg>
+        </div>
+        <div class="input-sets">
+          <!-- user setting -->
         <div class="input-box">
           <!-- Total number of hours the timer is to be ran -->
-          <lable class="input-title"> Timer hours </lable>
+          <label class="input-title"> Timer hours </label>
           <input
             type="number"
             name="countdownto"
             id="countdownto"
             min="0"
             max="24"
+            class="addNewItem"
             required
           />
         </div>
         <!-- Total number of intervals until the timer is ran -->
         <div class="input-box">
-          <lable class="input-title"> Timer Minutes </lable>
+          <label class="input-title"> Timer Minutes </label>
           <input
             type="number"
             name="countdowntomin"
             id="countdowntomin"
-            min="1"
+            min="0"
             max="59"
+            class="addNewItem"
           />
         </div>
         <div class="input-box">
-          <lable class="input-title"> Break time (min) </lable>
+          <label class="input-title"> Break time (min) </label>
           <input
             type="number"
             name="breaktime"
             id="breaktime"
             min="1"
             max="59"
+            class="addNewItem"
           />
         </div>
+      
         <!-- Total number of intervals until the timer is ran -->
         <div class="input-box">
-          <lable class="input-title"> Breaks planned </lable>
-          <input type="number" name="breakbtw" id="breakbtw" min="0" max="5" />
+          <label class="input-title"> Breaks planned </label>
+          <input type="number" name="breakbtw" class="addNewItem" id="breakbtw" min="0" max="5" />
+        </div>
+        <!-- Total number of intervals until the timer is ran -->
+        <div class="input-box repeatTimer">
+
+          <label class="container"> 
+           Repeat Timer
+            <input type="checkbox" id="repeatTimer">
+            <span class="checkmark"></span>
+          </label>
+        </div>
         </div>
         <!-- Action button -->
         <div class="actionbtn">
@@ -59,10 +80,10 @@
           <button type="reset" class="btn-secondary">Reset</button>
         </div>
       </form>
-    </nav>
-    <div class="menubtn">
-      <img src="./image/hand.svg" alt="hand" class="hand" />
-    </div>
+  </dialog>
+  <div class="menubtn">
+    <img src="./image/hand.svg" alt="hand" class="hand" />
+  </div>
 
     <!-- Main content -->
     <main>
@@ -113,8 +134,10 @@
             </div>
           </div>
           <div class="count-action">
-            <span id="countendat"></span>
-          
+            <p id="countendat"></p>
+            <!-- <div class="progress-border">
+              <div class="progress-inner"></div>
+            </div> -->
           </div>
         </div>
         <!-- To do list -->
@@ -123,9 +146,9 @@
           <div class="container-todolist">
             <form action="#" class="todolist" id="todolist">
               <!-- <input type="text" class="addNewItem" /> -->
-              <input type="text" name=""class="addNewItem" id="todoinput" placeholder="Type here to add new item" required>
-              <input type="number" name=""class="addNewItem timeinp" id="todoTimer"  min="0" max="24" placeholder="hour" required>
-              <input type="number" name=""class="addNewItem timeinp" id="todoTimermin"  min="1" max="59" placeholder="minutes" required>
+              <input type="text" class="addNewItem" id="todoinput" placeholder="Type here to add new item" autocomplete="off" required>
+              <input type="number" class="addNewItem timeinp" id="todoTimer"  min="0" max="24" placeholder="hour" required>
+              <input type="number" class="addNewItem timeinp" id="todoTimermin"  min="0" max="59" placeholder="minutes" required>
               <!-- <input type="datetime-local" name=""class="addNewItemdate" required> -->
               <button class="addlist" type="submit">
                 <svg
@@ -141,15 +164,22 @@
               </button>
             </form action="#">
             <div class="todo-items">
+              
             </div>
           </div>
         </div>
       </div>
       <template class="template">
         <div class="todo-item">
-          <input type="checkbox" name="checkbox" class="checkbox" />
-          <span class="todo-content"></span>
-          <span class="todo-timer"></span>
+               
+          <label class="container"> 
+            <div class="trail-content">
+            <span class="trail--data">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaini</span>
+            <p class="trail-timer">Time to be spent: <span class="trail-content--timer">1.24hr</span></p>
+          </div>
+            <input type="checkbox" >
+            <span class="checkmark"></span>
+          </label>
         </div>
       </template>
     </main>
